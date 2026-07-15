@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CYDEIA — Ciberseguridad estratégica Europa–México</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#0B1E3D;
+    --navy-900:#122C56;
+    --navy-800:#173B72;
+    --navy-700:#1F4E8E;
+    --blue-500:#2E6FB3;
+    --blue-300:#8FB8E0;
+    --gold-500:#D9A441;
+    --gold-300:#EFC97A;
+    --ink:#132038;
+    --slate:#5B6577;
+    --slate-light:#8B93A3;
+    --line:#E4E9F1;
+    --bg:#FFFFFF;
+    --bg-soft:#F4F7FB;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    color:var(--navy-900);
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  @media(max-width:700px){ .wrap{padding:0 20px;} }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--gold-500); outline-offset:3px; }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  header{ background:#fff; border-bottom:1px solid var(--line); position:sticky; top:0; z-index:100; }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; padding:16px 32px; gap:20px; }
+  .brand{display:flex;align-items:center;gap:9px;}
+  .brand-mark{width:30px;height:30px;flex-shrink:0;}
+  .brand-word{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:21px; color:var(--navy-900); line-height:1; }
+  .brand-tag{ font-size:8px; letter-spacing:0.1em; color:var(--slate-light); font-weight:700; display:block; margin-top:3px; }
+  .navlinks{display:flex;gap:26px;font-size:13.5px;font-weight:600;color:var(--slate);align-items:center;}
+  .navlinks a{position:relative; padding-bottom:16px; margin-bottom:-16px; transition:color .2s; display:flex; align-items:center; gap:4px;}
+  .navlinks a:hover{color:var(--navy-900);}
+  .navlinks a.active{color:var(--navy-900);}
+  .navlinks a.active::after{ content:''; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--navy-800); }
+  .chev{width:9px;height:9px;opacity:0.6;}
+  .cta-btn{
+    background:var(--navy-900); color:#fff; padding:11px 20px; border-radius:8px;
+    font-size:13px; font-weight:700; white-space:nowrap; border:1px solid var(--navy-900);
+    display:inline-flex; align-items:center; gap:8px; transition:background .2s, transform .2s;
+  }
+  .cta-btn:hover{background:var(--navy-800); transform:translateY(-1px);}
+  .cta-outline{
+    background:transparent; color:var(--navy-900); border:1px solid var(--line);
+    padding:11px 20px; border-radius:8px; font-size:13px; font-weight:700;
+    display:inline-flex; align-items:center; gap:8px; transition:all .2s;
+  }
+  .cta-outline:hover{border-color:var(--navy-900);}
+
+  /* ---------- HERO ---------- */
+  .hero{ position:relative; background:var(--bg); overflow:hidden; }
+  .hero-grid{ display:grid; grid-template-columns:0.92fr 1.08fr; align-items:stretch; min-height:520px; }
+  @media(max-width:960px){ .hero-grid{grid-template-columns:1fr; min-height:0;} }
+  .hero-copy{ padding:56px 8px 40px 0; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2; }
+  @media(max-width:960px){ .hero-copy{padding:40px 0 24px;} }
+  .hero h1{ font-size:clamp(28px,3.6vw,40px); line-height:1.2; margin-bottom:18px; color:var(--navy-900); }
+  .hero p.lead{ font-size:15.5px; color:var(--slate); max-width:400px; margin-bottom:26px; }
+  .hero-ctas{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:28px;}
+  .hero-tags{display:flex; gap:0; flex-wrap:wrap; align-items:center; font-size:12.5px; font-weight:700; color:var(--navy-800); letter-spacing:0.02em;}
+  .hero-tag{display:flex; align-items:center; gap:7px; padding:0 14px;}
+  .hero-tag:first-child{padding-left:0;}
+  .hero-tag svg{width:16px;height:16px;flex-shrink:0;color:var(--navy-800);}
+  .tag-sep{width:1px; height:14px; background:var(--line);}
+
+  .hero-visual{ position:relative; overflow:hidden; min-height:460px; }
+  .hero-visual svg{ width:100%; height:100%; display:block; }
+  .hero-visual img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .hero-visual::before{
+    content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:linear-gradient(90deg, #F7FAFD 0%, rgba(247,250,253,0) 22%);
+  }
+  .badge-sede{
+    position:absolute; right:24px; bottom:24px; z-index:3;
+    background:#fff; padding:10px 16px; border-radius:8px;
+    display:flex; align-items:center; gap:8px;
+    font-size:12px; font-weight:700; color:var(--navy-900); letter-spacing:0.02em;
+    box-shadow:0 12px 28px -14px rgba(11,30,61,0.4);
+  }
+  .badge-sede .pin{width:14px;height:14px;color:var(--gold-500);flex-shrink:0;}
+  @media(max-width:960px){ .hero-visual{min-height:320px;} }
+
+  .dash{stroke-dasharray:5 7; animation:dashmove 7s linear infinite;}
+  @keyframes dashmove{ to{ stroke-dashoffset:-160; } }
+
+  /* ---------- STATS CARD ---------- */
+  .stats-wrap{ margin-top:-1px; padding-bottom:0; }
+  .stats-card{
+    background:#fff; border-radius:20px; box-shadow:0 30px 60px -34px rgba(11,30,61,0.28);
+    border:1px solid var(--line);
+    display:grid; grid-template-columns:repeat(5,1fr);
+    padding:34px 8px;
+  }
+  @media(max-width:900px){ .stats-card{grid-template-columns:repeat(2,1fr); row-gap:28px;} }
+  .stat{ text-align:center; padding:0 14px; position:relative; }
+  .stat + .stat::before{
+    content:''; position:absolute; left:0; top:8px; bottom:8px; width:1px; background:var(--line);
+  }
+  @media(max-width:900px){ .stat + .stat::before{display:none;} }
+  .stat-icon{ color:var(--navy-800); margin-bottom:12px; }
+  .stat-icon svg{width:26px;height:26px;}
+  .stat-num{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:clamp(26px,2.6vw,32px); color:var(--navy-900); }
+  .stat-num .suf{color:var(--gold-500);}
+  .stat-label{ font-size:11.5px; font-weight:600; color:var(--slate); margin-top:8px; line-height:1.5; max-width:150px; margin-left:auto; margin-right:auto; text-transform:uppercase; letter-spacing:0.01em; }
+
+  /* ---------- QUIENES SOMOS ---------- */
+  .bridge-section{ background:var(--bg-soft); padding:96px 0; }
+  @media(max-width:700px){ .bridge-section{padding:64px 0;} }
+  .qs-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:50px; align-items:center;}
+  @media(max-width:900px){ .qs-grid{grid-template-columns:1fr;} }
+  .kicker{ font-size:12px; letter-spacing:0.12em; color:var(--slate-light); text-transform:uppercase; margin-bottom:14px; font-weight:700; }
+  .qs-grid h2{font-size:clamp(24px,2.8vw,30px); margin-bottom:16px; line-height:1.2;}
+  .qs-grid > div > p.desc{color:var(--slate); font-size:14.5px; margin-bottom:24px; max-width:420px;}
+  .qs-point{display:flex; gap:14px; margin-bottom:16px; align-items:flex-start;}
+  .qs-point .icn{
+    width:30px; height:30px; border-radius:50%; border:1.5px solid var(--navy-800); color:var(--navy-800);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .qs-point .icn svg{width:14px;height:14px;}
+  .qs-point h4{font-size:14.5px; color:var(--navy-900); margin-bottom:2px; font-weight:700; font-family:'Inter';}
+  .qs-point p{font-size:13.2px; color:var(--slate);}
+  .map-visual{ position:relative; }
+  .map-visual svg{ width:100%; height:auto; }
+
+  /* ---------- QUE HACEMOS ---------- */
+  .services{background:var(--bg); padding:96px 0;}
+  @media(max-width:700px){ .services{padding:64px 0;} }
+  .svc-grid{display:grid; grid-template-columns:0.8fr 2.4fr; gap:0; align-items:start;}
+  @media(max-width:960px){ .svc-grid{grid-template-columns:1fr;} }
+  .svc-head{padding-right:24px;}
+  .svc-head h2{font-size:clamp(22px,2.4vw,27px); margin-bottom:12px; line-height:1.25;}
+  .svc-head p{color:var(--slate); font-size:13.5px;}
+  .cards-row{ display:grid; grid-template-columns:repeat(5,1fr); }
+  @media(max-width:960px){ .cards-row{grid-template-columns:repeat(3,1fr); margin-top:32px;} }
+  @media(max-width:560px){ .cards-row{grid-template-columns:repeat(2,1fr);} }
+  .svc-card{
+    border:1px solid var(--line); padding:22px 16px; text-align:left;
+    margin-left:-1px; margin-top:-1px;
+    transition:box-shadow .25s, background .25s;
+    position:relative;
+  }
+  .svc-card:hover{ box-shadow:0 20px 40px -22px rgba(11,30,61,0.25); background:#fff; z-index:2; }
+  .svc-card .icon{
+    width:34px; height:34px; color:var(--navy-800); margin-bottom:16px;
+  }
+  .svc-card .icon svg{width:100%;height:100%;}
+  .svc-card h3{font-size:13.8px; font-family:'Inter'; font-weight:700; margin-bottom:8px; color:var(--navy-900); line-height:1.35;}
+  .svc-card p{font-size:12px; color:var(--slate); line-height:1.5;}
+
+  /* ---------- CTA BANNER ---------- */
+  .cta-section{padding:0 0 80px;}
+  .cta-banner{
+    background:linear-gradient(120deg, #EAF1FB 0%, #F7FAFD 55%, #ffffff 100%);
+    border-radius:20px; overflow:hidden;
+    display:grid; grid-template-columns:1.4fr 1fr; align-items:center;
+    border:1px solid var(--line);
+  }
+  @media(max-width:800px){ .cta-banner{grid-template-columns:1fr;} }
+  .cta-text{padding:44px 40px;}
+  .cta-text h3{color:var(--navy-900); font-size:clamp(20px,2.2vw,25px); max-width:400px; margin-bottom:8px;}
+  .cta-text p{color:var(--slate); font-size:13.5px; margin-bottom:22px;}
+  .cta-skyline{ position:relative; min-height:180px; }
+  .cta-skyline svg{width:100%;height:100%; display:block;}
+  @media(max-width:800px){ .cta-skyline{min-height:140px;} }
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--navy-950); color:#8B93A3; padding:60px 0 26px;}
+  .foot-grid{display:grid; grid-template-columns:1.4fr repeat(3,1fr); gap:36px; margin-bottom:44px;}
+  @media(max-width:800px){ .foot-grid{grid-template-columns:1fr 1fr;} }
+  .foot-brand .brand-word{color:#fff;}
+  .foot-brand p{font-size:13px; margin-top:12px; max-width:250px; line-height:1.7;}
+  footer h5{color:#fff; font-size:12.5px; letter-spacing:0.03em; margin-bottom:14px; font-weight:700;}
+  footer ul{list-style:none;}
+  footer li{margin-bottom:9px; font-size:13px;}
+  footer a:hover{color:#fff;}
+  .foot-bottom{ border-top:1px solid rgba(255,255,255,0.08); padding-top:20px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:12px; }
+
+  /* ---------- FORMULARIO DE CONTACTO ---------- */
+  .contact-form{
+    margin-top:22px;
+    max-width:560px;
+  }
+  .form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  .form-field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .form-field.full{
+    grid-column:1 / -1;
+  }
+  .form-field label{
+    font-size:12px;
+    font-weight:700;
+    color:var(--navy-900);
+  }
+  .form-field input,
+  .form-field textarea{
+    width:100%;
+    border:1px solid #CFD8E6;
+    border-radius:9px;
+    background:#FFFFFF;
+    color:var(--ink);
+    font:inherit;
+    font-size:13px;
+    padding:12px 13px;
+    outline:none;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .form-field input:focus,
+  .form-field textarea:focus{
+    border-color:var(--blue-500);
+    box-shadow:0 0 0 3px rgba(46,111,179,0.13);
+  }
+  .form-field textarea{
+    resize:vertical;
+    min-height:105px;
+  }
+  .form-actions{
+    margin-top:14px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .form-submit{
+    cursor:pointer;
+  }
+  .form-submit:disabled{
+    opacity:.65;
+    cursor:not-allowed;
+    transform:none;
+  }
+  .form-status{
+    min-height:20px;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--slate);
+  }
+  .form-note{
+    margin-top:10px;
+    font-size:11px !important;
+    color:var(--slate-light) !important;
+  }
+  .hp-field{
+    position:absolute !important;
+    left:-9999px !important;
+    opacity:0 !important;
+    pointer-events:none !important;
+  }
+  @media(max-width:600px){
+    .form-grid{grid-template-columns:1fr;}
+    .form-field.full{grid-column:auto;}
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none">
+        <path d="M4 22C10 14 16 26 22 18C26 12 30 20 36 12" stroke="#122C56" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M4 27C10 19 16 31 22 23C26 17 30 25 36 17" stroke="#2E6FB3" stroke-width="2.2" stroke-linecap="round" opacity="0.75"/>
+      </svg>
+      <div>
+        <span class="brand-word">Cydeia</span>
+        <span class="brand-tag">CIBERSEGURIDAD DE INTELIGENCIA ARTIFICIAL</span>
+      </div>
+    </div>
+    <div class="navlinks">
+      <a href="#inicio" class="active">Inicio</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#soluciones">Soluciones <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 4.5 6 7.5 9 4.5"/></svg></a>
+
+      <a href="#contacto">Contacto</a>
+    </div>
+    <a href="#contacto" class="cta-btn">Solicitar reunión <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </nav>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1>Ciberseguridad estratégica para proteger lo que mantiene en marcha a su organización.</h1>
+      <p class="lead">En Cydeia conectamos experiencia especializada en Europa con las necesidades operativas, regulatorias y empresariales de México.</p>
+      <div class="hero-ctas">
+        <a href="#contacto" class="cta-btn">Solicitar una reunión <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#nosotros" class="cta-outline">Conocer Cydeia <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="hero-tags">
+        <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="9" width="4" height="11"/><rect x="10" y="5" width="4" height="15"/><rect x="16" y="12" width="4" height="8"/></svg>EMPRESAS</span>
+        <span class="tag-sep"></span>
+        <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6"/></svg>GOBIERNO</span>
+        <span class="tag-sep"></span>
+        <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6z"/></svg>INFRAESTRUCTURA CRÍTICA</span>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <img src="madrid.jpg" alt="Edificio Metrópolis, Gran Vía, Madrid">
+      <div class="badge-sede">
+        <svg class="pin" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+        SEDE MADRID, ESPAÑA
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap stats-wrap">
+  <div class="stats-card" id="statsGrid">
+    <div class="stat">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="8" width="6" height="13"/><rect x="11" y="3" width="6" height="18"/><rect x="18" y="11" width="6" height="10"/></svg></div>
+      <div class="stat-num"><span class="count" data-target="9">0</span><span class="suf">+</span></div>
+      <div class="stat-label">Trabajamos para 9 grandes compañías en Europa</div>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6z"/><path d="M9 12.3 11 14.3 15.3 10"/></svg></div>
+      <div class="stat-num"><span class="count" data-target="250">0</span><span class="suf">+</span></div>
+      <div class="stat-label">Certificaciones internacionales en nuestro equipo</div>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="9" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="10" r="2.3"/><path d="M15 20c.2-2.6 1.4-4.5 3-5.3"/></svg></div>
+      <div class="stat-num"><span class="count" data-target="60">0</span><span class="suf">+</span></div>
+      <div class="stat-label">Especialistas en ciberseguridad a su servicio</div>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z"/></svg></div>
+      <div class="stat-num"><span class="count" data-target="12">0</span></div>
+      <div class="stat-label">Países en Europa donde hemos desarrollado proyectos</div>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.3 2.3 4.7-4.8"/></svg></div>
+      <div class="stat-num"><span class="count" data-target="98">0</span><span class="suf">%</span></div>
+      <div class="stat-label">De nuestros clientes renuevan su confianza año tras año</div>
+    </div>
+  </div>
+</div>
+
+<section class="bridge-section" id="nosotros">
+  <div class="wrap qs-grid">
+    <div>
+      <div class="kicker">Quiénes somos</div>
+      <h2>Ahora un puente estratégico entre Europa y México.</h2>
+      <p class="desc">CYDEIA es una empresa especializada en ciberseguridad que ayuda a organizaciones a proteger sus operaciones, reducir riesgos digitales y fortalecer su capacidad de respuesta ante amenazas.</p>
+
+      <div class="qs-point">
+        <span class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z"/></svg></span>
+        <div><h4>Experiencia europea</h4><p>Metodologías y estándares internacionales.</p></div>
+      </div>
+      <div class="qs-point">
+        <span class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c0-4 3-6 7-6s7 2 7 6"/></svg></span>
+        <div><h4>Entendimiento local</h4><p>Adaptamos soluciones a la realidad de México.</p></div>
+      </div>
+      <div class="qs-point">
+        <span class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4 6.5v5c0 5 3.4 8.4 8 9.5 4.6-1.1 8-4.5 8-9.5v-5z"/></svg></span>
+        <div><h4>Enfoque estratégico</h4><p>Ciberseguridad como habilitador del negocio.</p></div>
+      </div>
+    </div>
+
+    <div class="map-visual" id="puente">
+      <svg viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mapa mundial real con conexión entre México y Madrid">
+        <defs>
+          <filter id="mapShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#0B1E3D" flood-opacity="0.10"/>
+          </filter>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="5" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <linearGradient id="oceanGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#F6F9FD"/>
+            <stop offset="1" stop-color="#EAF1F9"/>
+          </linearGradient>
+        </defs>
+
+        <rect x="0" y="0" width="1000" height="520" rx="24" fill="url(#oceanGradient)"/>
+
+        <!-- Mapa mundial real (proyección equirectangular) -->
+        <image
+          href="https://commons.wikimedia.org/wiki/Special:Redirect/file/BlankMap-World.svg"
+          x="26" y="36" width="948" height="448"
+          preserveAspectRatio="xMidYMid meet"
+          opacity="0.52"
+          filter="url(#mapShadow)"/>
+
+        <!-- Conexión México–Madrid -->
+        <path d="M239 212 Q 385 45 545 141"
+              fill="none" stroke="#FFFFFF" stroke-width="7" opacity="0.85"/>
+        <path d="M239 212 Q 385 45 545 141"
+              fill="none" stroke="#D9A441" stroke-width="3.5"
+              stroke-linecap="round" class="dash"/>
+
+        <!-- México -->
+        <circle cx="239" cy="212" r="18" fill="#122C56" opacity="0.12"/>
+        <circle cx="239" cy="212" r="8" fill="#122C56"/>
+        <circle cx="239" cy="212" r="3" fill="#FFFFFF"/>
+        <g transform="translate(239 237)">
+          <rect x="-52" y="0" width="104" height="34" rx="17" fill="#FFFFFF" opacity="0.96"/>
+          <text x="0" y="22" fill="#122C56" font-size="15" font-weight="800"
+                font-family="Plus Jakarta Sans, sans-serif" text-anchor="middle">MÉXICO</text>
+        </g>
+
+        <!-- Madrid -->
+        <circle cx="545" cy="141" r="10" fill="none" stroke="#D9A441" stroke-width="3" opacity="0.8">
+          <animate attributeName="r" values="10;34" dur="2.8s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.8;0" dur="2.8s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="545" cy="141" r="10" fill="none" stroke="#D9A441" stroke-width="3" opacity="0.8">
+          <animate attributeName="r" values="10;34" dur="2.8s" begin="1.4s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.8;0" dur="2.8s" begin="1.4s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="545" cy="141" r="9" fill="#D9A441" filter="url(#glow)"/>
+        <circle cx="545" cy="141" r="3" fill="#FFFFFF"/>
+        <g transform="translate(545 162)">
+          <rect x="-58" y="0" width="116" height="52" rx="18" fill="#FFFFFF" opacity="0.97"/>
+          <text x="0" y="21" fill="#122C56" font-size="15" font-weight="800"
+                font-family="Plus Jakarta Sans, sans-serif" text-anchor="middle">MADRID</text>
+          <text x="0" y="39" fill="#5B6577" font-size="11"
+                font-family="Inter, sans-serif" text-anchor="middle">ESPAÑA</text>
+        </g>
+      </svg>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="soluciones">
+  <div class="wrap svc-grid">
+    <div class="svc-head">
+      <div class="kicker">Qué hacemos</div>
+      <h2>Soluciones integrales de ciberseguridad</h2>
+      <p>Ayudamos a su organización a identificar riesgos, proteger su información crítica y fortalecer su resiliencia operativa.</p>
+    </div>
+    <div class="cards-row">
+      <div class="svc-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 2 6.5v6c0 6 4.2 9.7 10 11.5 5.8-1.8 10-5.5 10-11.5v-6z"/><path d="M12 8v5M12 16.5h.01"/></svg></div>
+        <h3>Evaluación de riesgos</h3>
+        <p>Identificamos vulnerabilidades y riesgos críticos para su organización.</p>
+      </div>
+      <div class="svc-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="18" rx="1.5"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></div>
+        <h3>Estrategia y gobierno</h3>
+        <p>Diseñamos políticas, procesos y marcos de ciberseguridad alineados al negocio.</p>
+      </div>
+      <div class="svc-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+        <h3>Protección de información</h3>
+        <p>Implementamos controles para proteger sus datos más importantes.</p>
+      </div>
+      <div class="svc-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="12" rx="1.4"/><path d="M8 20h8M12 16v4"/><path d="M9 10.5 11 12.5 15 8.5"/></svg></div>
+        <h3>Respuesta a incidentes</h3>
+        <p>Actuamos rápido para minimizar el impacto y asegurar la continuidad.</p>
+      </div>
+      <div class="svc-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 3h8l4 4v14H7z"/><path d="M15 3v4h4"/><path d="M9.5 13.5 11 15l3.5-3.6"/></svg></div>
+        <h3>Cumplimiento normativo</h3>
+        <p>Aseguramos el cumplimiento de regulaciones locales e internacionales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contacto">
+  <div class="wrap">
+    <div class="cta-banner">
+      <div class="cta-text">
+        <h3>Hablemos sobre cómo podemos proteger su organización.</h3>
+        <p>Cuéntenos brevemente qué necesita y nos pondremos en contacto con usted.</p>
+
+        <form id="contactForm" class="contact-form">
+          <!-- Obtén tu clave gratuita en web3forms.com y reemplaza el texto de abajo -->
+          <!-- La Access Key debe generarse para: silvana.silveyra@hotmail.com -->
+<input type="hidden" name="access_key" value="d95af8db-d183-4328-aca8-69dbab3f8920">
+<input type="hidden" name="subject" value="Nueva solicitud desde la página web de CYDEIA">
+<input type="hidden" name="from_name" value="Sitio Web CYDEIA">
+        
+          <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off">
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="nombre">Nombre completo</label>
+              <input id="nombre" name="name" type="text" placeholder="Su nombre" required>
+            </div>
+
+            <div class="form-field">
+              <label for="empresa">Empresa u organización</label>
+              <input id="empresa" name="company" type="text" placeholder="Nombre de la organización">
+            </div>
+
+            <div class="form-field">
+              <label for="correo">Correo electrónico</label>
+              <input id="correo" name="email" type="email" placeholder="nombre@empresa.com" required>
+            </div>
+
+            <div class="form-field">
+              <label for="telefono">Teléfono</label>
+              <input id="telefono" name="phone" type="tel" placeholder="+52">
+            </div>
+
+            <div class="form-field full">
+              <label for="mensaje">¿Cómo podemos ayudarle?</label>
+              <textarea id="mensaje" name="message" placeholder="Describa brevemente sus necesidades de ciberseguridad." required></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button id="submitButton" type="submit" class="cta-btn form-submit">
+              <span>Enviar mensaje</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+                <path d="M5 12h14M13 6l6 6-6 6"/>
+              </svg>
+            </button>
+            <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
+          </div>
+
+          <p class="form-note">Sus datos serán utilizados únicamente para responder a su solicitud.</p>
+        </form>
+      </div>
+      <div class="cta-skyline">
+    <img
+        src="edificios.jpg"
+        alt="Edificios corporativos"
+        style="width:100%;height:100%;object-fit:cover;display:block;">
+</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="brand-word">Cydeia</span>
+        <p>Canal de desarrollo de negocio en ciberseguridad entre Europa y México. Sede en Madrid, España.</p>
+      </div>
+      <div>
+        <h5>Empresa</h5>
+        <ul>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#soluciones">Soluciones</a></li>
+          <li><a href="#puente">Europa–México</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Sectores</h5>
+        <ul>
+          <li><a href="#">Gobierno</a></li>
+          <li><a href="#">Empresas</a></li>
+          <li><a href="#">Infraestructura crítica</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul>
+          <li>Madrid, España</li>
+          <li>h+52 8715840482</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Cydeia. Todos los derechos reservados.</span>
+      <span>Ciberseguridad de inteligencia artificial</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const counters = document.querySelectorAll('.count');
+  let started = false;
+  function animateCounters(){
+    if(started) return;
+    started = true;
+    counters.forEach(el => {
+      const target = parseInt(el.dataset.target, 10);
+      const duration = 3000;
+      const startTime = performance.now();
+      function tick(now){
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target);
+        if(progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(prefersReduced){
+    counters.forEach(el => el.textContent = el.dataset.target);
+  } else {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if(entry.isIntersecting) animateCounters(); });
+    }, { threshold: 0.4 });
+    const band = document.getElementById('statsGrid');
+    if(band) observer.observe(band);
+  }
+</script>
+
+
+<script>
+  const contactForm = document.getElementById('contactForm');
+  const submitButton = document.getElementById('submitButton');
+  const formStatus = document.getElementById('formStatus');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function(event) {
+      event.preventDefault();
+
+      const accessKey = contactForm.querySelector('[name="access_key"]').value.trim();
+      if (!accessKey || accessKey === 'PEGA_AQUI_TU_ACCESS_KEY') {
+        formStatus.textContent = 'Falta configurar la clave del formulario.';
+        return;
+      }
+
+      submitButton.disabled = true;
+      formStatus.textContent = 'Enviando mensaje…';
+
+      try {
+        const formData = new FormData(contactForm);
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          formStatus.textContent = 'Mensaje enviado correctamente. Gracias.';
+          contactForm.reset();
+        } else {
+          throw new Error(result.message || 'No fue posible enviar el mensaje.');
+        }
+      } catch (error) {
+        formStatus.textContent = 'No se pudo enviar. Inténtelo nuevamente.';
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
